@@ -24,7 +24,10 @@
   --display: "Cinzel", "Times New Roman", serif;
 
   /* cards are physical objects, so they ignore the theme */
-  --card-frame: #3a1d3e;
+  --card-frame: #52294f;   /* lighter plum: less ink on card stock */
+  --card-title: #3a1d3e;   /* dark plum for text, keeps contrast */
+  --card-back: #62325f;
+  --card-medal: #4a2348;
   --card-brass: #c39a4e;
   --card-paper: #f6f3ee;
   --card-ink: #231a24;
@@ -95,16 +98,6 @@ main { padding: 24px max(16px, env(safe-area-inset-right, 0px)) 40px 24px; min-w
 
 /* ---------- cards view ---------- */
 .studio { display: block; }
-.backs { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 24px; }
-.backs h2 { font: 700 16px var(--display); letter-spacing: .05em; margin: 0 0 4px; }
-.backs p { margin: 0 0 16px; color: var(--muted); font-size: 14px; }
-.back-grid { display: flex; flex-wrap: wrap; gap: 16px; }
-.back-opt { border: 2px solid transparent; border-radius: 12px; padding: 10px 10px 8px; background: var(--panel); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--fg); }
-.back-opt:hover { border-color: var(--line); }
-.back-opt[aria-pressed="true"] { border-color: var(--accent); }
-.back-opt .card { zoom: 1.05; }
-.back-opt span { font-weight: 500; font-size: 14px; }
-.back-opt small { color: var(--muted); font-size: 12px; margin-top: -6px; }
 .preview { display: flex; flex-direction: column; gap: 14px; align-items: center; min-width: 0; }
 .preview-cards { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
 .preview-cards figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 8px; }
@@ -154,9 +147,9 @@ main { padding: 24px max(16px, env(safe-area-inset-right, 0px)) 40px 24px; min-w
   box-shadow: 0 0 0 .3mm var(--card-brass);
   padding: 2.2mm 2.5mm 1.5mm;
 }
-.card .head { display: flex; gap: 1.6mm; align-items: flex-start; }
+.card .head { display: flex; gap: 1.6mm; align-items: flex-start; padding-bottom: 1.4mm; }
 .card .titles { flex: 1; min-width: 0; }
-.card .name { font: 700 9.2pt/1.06 var(--display); color: var(--card-frame); letter-spacing: .01em; text-wrap: balance; overflow-wrap: anywhere; }
+.card .name { font: 700 9.2pt/1.06 var(--display); color: var(--card-title); letter-spacing: .01em; text-wrap: balance; overflow-wrap: anywhere; }
 .card .sub { font-size: 6.4pt; font-style: italic; color: var(--school); margin-top: .5mm; }
 .card .seal {
   width: 7.2mm; height: 7.2mm; border-radius: 50%; flex: none;
@@ -167,17 +160,7 @@ main { padding: 24px max(16px, env(safe-area-inset-right, 0px)) 40px 24px; min-w
 }
 .card.cont .name { font-size: 8pt; }
 .card.cont .seal { width: 5.6mm; height: 5.6mm; font-size: 7pt; }
-/* music staff as divider – the bard's instrument */
-.card .staff {
-  height: 1.7mm; margin: 1.3mm 0 1.2mm; flex: none;
-  background: repeating-linear-gradient(to bottom, var(--card-brass) 0 .12mm, transparent .12mm .4mm);
-  opacity: .75; position: relative;
-}
-.card .staff::after {
-  content: ""; position: absolute; right: 3mm; top: -.6mm; width: 1.4mm; height: 1.1mm;
-  border-radius: 50%; background: var(--card-frame); transform: rotate(-20deg);
-}
-.card .stats { display: grid; grid-template-columns: 1fr 1fr; gap: .7mm; }
+.card .stats { display: grid; grid-template-columns: 1fr 1fr; gap: .7mm; margin-top: 1.4mm; }
 .card .stat { background: color-mix(in srgb, var(--school) 9%, var(--card-paper)); border-radius: .8mm; padding: .6mm 1.1mm .7mm; min-width: 0; }
 .card .stat .k { font: 700 4.5pt/1.2 var(--card-sc); letter-spacing: .07em; color: var(--card-muted); }
 .card .stat .v { font-size: 6.5pt; line-height: 1.12; font-weight: 500; overflow-wrap: anywhere; }
@@ -189,10 +172,10 @@ main { padding: 24px max(16px, env(safe-area-inset-right, 0px)) 40px 24px; min-w
   flex: 1; min-height: 0; overflow: hidden; margin-top: 1.4mm;
   font-size: var(--fs, 7.4pt); line-height: 1.2; hyphens: auto; text-align: left;
 }
-.card.cont .text { margin-top: 0; }
+.card.cont .text { margin-top: 1.4mm; }
 .card .text p { margin: 0 0 .4em; }
-.card .text strong { font-weight: 700; font-style: italic; color: var(--card-frame); }
-.card .text .tcap { font: 700 .82em/1.2 var(--card-sc); letter-spacing: .06em; color: var(--card-frame); margin: .2em 0 .15em; }
+.card .text strong { font-weight: 700; font-style: italic; color: var(--card-title); }
+.card .text .tcap { font: 700 .82em/1.2 var(--card-sc); letter-spacing: .06em; color: var(--card-title); margin: .2em 0 .15em; }
 .card .text table { width: 100%; border-collapse: collapse; font-size: .88em; line-height: 1.15; margin: 0 0 .5em; }
 .card .text th { font: 700 .85em/1.15 var(--card-sc); letter-spacing: .04em; text-align: left; color: var(--card-muted); background: color-mix(in srgb, var(--school) 10%, var(--card-paper)); padding: .3mm .6mm; }
 .card .text td { padding: .3mm .6mm; vertical-align: top; border-bottom: .1mm solid color-mix(in srgb, var(--card-brass) 45%, transparent); }
@@ -202,83 +185,28 @@ main { padding: 24px max(16px, env(safe-area-inset-right, 0px)) 40px 24px; min-w
   border-top: .2mm solid var(--card-brass); padding-top: .8mm; margin-top: .6mm;
   font: 500 4.8pt/1 var(--card-sc); letter-spacing: .07em; color: var(--card-muted);
 }
-.card .foot b { color: var(--card-frame); }
+.card .foot b { color: var(--card-title); }
 
 /* backs: shared */
 .card.back .inner { position: relative; overflow: hidden; }
 .card.back .ov { position: absolute; inset: 0; width: 100%; height: 100%; }
 .card.back .abs { position: absolute; left: 0; right: 0; display: flex; justify-content: center; }
 
-/* back 1 · Lyre medallion */
+/* back · purple and gold medallion */
 .card.back-lyre .inner {
   background:
     radial-gradient(circle at 50% 46%, rgb(255 255 255 / .08), transparent 55%),
     repeating-linear-gradient(45deg, rgb(195 154 78 / .10) 0 .25mm, transparent .25mm 3mm),
     repeating-linear-gradient(-45deg, rgb(195 154 78 / .10) 0 .25mm, transparent .25mm 3mm),
-    #4a2650;
-  box-shadow: inset 0 0 0 .3mm var(--card-brass), inset 0 0 0 1.2mm #4a2650, inset 0 0 0 1.45mm var(--card-brass);
-  align-items: center; justify-content: center; gap: 3mm; color: var(--card-brass);
+    var(--card-back);
+  box-shadow: inset 0 0 0 .3mm var(--card-brass), inset 0 0 0 1.2mm var(--card-back), inset 0 0 0 1.45mm var(--card-brass);
+  align-items: center; justify-content: center; gap: 3mm; color: #e3c47e; /* lighter gold reads better on the lighter plum */
 }
-.card.back .medal { width: 30mm; height: 30mm; border-radius: 50%; display: grid; place-items: center; background: #3a1d3e; box-shadow: 0 0 0 .4mm var(--card-brass), 0 0 0 1.4mm #3a1d3e, 0 0 0 1.7mm var(--card-brass); }
+.card.back .medal { width: 30mm; height: 30mm; border-radius: 50%; display: grid; place-items: center; background: var(--card-medal); box-shadow: 0 0 0 .4mm var(--card-brass), 0 0 0 1.4mm var(--card-medal), 0 0 0 1.7mm var(--card-brass); }
 .card.back .medal svg { width: 15mm; height: 18mm; }
 .card.back .cls { font: 700 11pt/1 var(--display); letter-spacing: .32em; margin-right: -.32em; }
-.card.back .tiny { font: 500 5.5pt/1 var(--card-sc); letter-spacing: .2em; opacity: .8; }
+.card.back .tiny { font: 500 5.5pt/1 var(--card-sc); letter-spacing: .2em; }
 
-/* back 2 · Curtain call: velvet stage curtain, gold valance, spotlight */
-.card.back-stage { background: #2a0a10; }
-.card.back-stage .inner {
-  padding: 0; color: #f0d48a;
-  background:
-    radial-gradient(ellipse 58% 34% at 50% 56%, rgb(255 228 165 / .62), rgb(255 228 165 / .14) 62%, transparent 78%),
-    linear-gradient(to bottom, transparent 55%, rgb(0 0 0 / .5)),
-    repeating-linear-gradient(90deg, #4c0a14 0, #8b1b2b 1.4mm, #b02f40 2.1mm, #8b1b2b 2.8mm, #4c0a14 4.2mm);
-  box-shadow: inset 0 0 0 .3mm var(--card-brass);
-}
-.back-stage .valance { position: absolute; inset: 0 0 auto; height: 10mm; background: linear-gradient(#4a0912, #7c1726); box-shadow: 0 .6mm 1mm rgb(0 0 0 / .45); }
-.back-stage .valance::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: .55mm; background: var(--card-brass); }
-.back-stage .valance::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2mm; height: 2mm; background: radial-gradient(circle at 50% 0, var(--card-brass) 0 .55mm, #7c1726 .6mm 1.55mm, transparent 1.6mm) 0 0 / 3.2mm 2mm repeat-x; }
-.back-stage .floor { position: absolute; inset: auto 0 0; height: 9mm; background: repeating-linear-gradient(90deg, #3c2116 0 6mm, #34190f 6mm 12mm), #2a140c; border-top: .45mm solid var(--card-brass); }
-.back-stage .floor::before { content: ""; position: absolute; left: 12%; right: 12%; top: 0; height: 3mm; background: radial-gradient(ellipse at 50% 0, rgb(255 228 165 / .35), transparent 70%); }
-.back-stage .lyre { top: 31mm; }
-.back-stage .lyre svg { width: 15mm; height: 18mm; filter: drop-shadow(0 .5mm .6mm rgb(60 10 10 / .6)); }
-.back-stage .cls { top: 54mm; font: 700 12pt/1 var(--display); letter-spacing: .34em; padding-left: .34em; color: #3a0b12; text-shadow: 0 0 1.5mm rgb(255 236 190 / .8); }
-.back-stage .tiny { top: 14.5mm; color: #f0d48a; }
-
-/* back 3 · Score: aged sheet music with a cartouche */
-.card.back-score .inner { padding: 0; background: radial-gradient(ellipse at 50% 45%, #f7efdc 30%, #eadcbc 100%); box-shadow: inset 0 0 0 .3mm var(--card-brass); }
-
-/* back 4 · Resonance: art-deco sound waves */
-.card.back-resonance { background: #0c171e; }
-.card.back-resonance .inner {
-  padding: 0; color: var(--card-brass);
-  background:
-    radial-gradient(circle at 50% 50%, transparent 0 13mm, rgb(12 23 30 / .0) 13mm, rgb(12 23 30 / .75) 36mm),
-    repeating-conic-gradient(from 0deg at 50% 50%, rgb(195 154 78 / .18) 0 2.5deg, transparent 2.5deg 15deg),
-    repeating-radial-gradient(circle at 50% 50%, transparent 0 2.1mm, rgb(195 154 78 / .42) 2.1mm 2.3mm),
-    radial-gradient(circle at 50% 50%, #1d3542, #0c171e 72%);
-  box-shadow: inset 0 0 0 .3mm var(--card-brass), inset 0 0 0 1.2mm #0c171e, inset 0 0 0 1.45mm var(--card-brass);
-}
-.back-resonance .diamond {
-  position: absolute; left: 50%; top: 50%; width: 21mm; height: 21mm; margin: -10.5mm 0 0 -10.5mm;
-  transform: rotate(45deg); background: #0c171e; display: grid; place-items: center;
-  box-shadow: 0 0 0 .4mm var(--card-brass), 0 0 0 1.4mm #0c171e, 0 0 0 1.7mm var(--card-brass);
-}
-.back-resonance .diamond svg { transform: rotate(-45deg); width: 12mm; height: 14.5mm; }
-.back-resonance .cls { top: 66mm; font: 700 11pt/1 var(--display); letter-spacing: .38em; padding-left: .38em; }
-.back-resonance .tiny { top: 16mm; }
-.back-resonance .cls span, .back-resonance .tiny span { background: #0c171e; padding: .8mm 2mm; }
-
-/* back 5 · Grimoire: tooled leather binding */
-.card.back-grimoire { background: #2b160c; }
-.card.back-grimoire .inner {
-  padding: 0;
-  background:
-    radial-gradient(circle at 30% 22%, rgb(255 220 180 / .10), transparent 45%),
-    radial-gradient(circle at 75% 85%, rgb(0 0 0 / .30), transparent 55%),
-    radial-gradient(ellipse 30% 18% at 68% 35%, rgb(0 0 0 / .10), transparent 70%),
-    radial-gradient(ellipse 25% 15% at 25% 70%, rgb(255 230 200 / .05), transparent 70%),
-    linear-gradient(135deg, #74402a, #4c2716);
-}
 
 #measure { position: absolute; left: -9999px; top: 0; visibility: hidden; }
 
@@ -340,11 +268,6 @@ main { padding: 24px max(16px, env(safe-area-inset-right, 0px)) 40px 24px; min-w
           <div class="preview-cards" id="pv"></div>
           <div class="dims" id="fitinfo"></div>
         </div>
-        <section class="backs" aria-labelledby="backs-h">
-          <h2 id="backs-h">Card back</h2>
-          <p>Pick the design for the preview and the print sheets.</p>
-          <div class="back-grid" id="back-grid"></div>
-        </section>
       </div>
     </section>
 
@@ -384,6 +307,7 @@ let deselected = [];
 try { deselected = JSON.parse(localStorage.getItem(STORE_KEY)) || []; } catch (e) {}
 try { localStorage.removeItem("bard-spell-cards-v2"); } catch (e) {} // old editable copy from an earlier version
 const spells = (window.SRD_BARD_SPELLS || []).map(s => ({ ...s, print: !deselected.includes(s.id) }));
+try { localStorage.removeItem("bard-spell-cards-emblem-v1"); localStorage.removeItem("bard-spell-cards-back-v1"); } catch (e) {}
 let activeId = spells[0]?.id, view = "cards";
 const save = () => { try { localStorage.setItem(STORE_KEY, JSON.stringify(spells.filter(s => !s.print).map(s => s.id))); } catch (e) {} };
 
@@ -441,7 +365,6 @@ function cardFront(s, fs, blocks, part = 1, total = 1) {
   if (part > 1) {
     return `<div class="card cont" style="--school:${col};--fs:${fs}pt"><div class="inner">
       <div class="head"><div class="titles"><div class="name">${esc(s.name)}</div><div class="sub">continued</div></div><div class="seal">${seal}</div></div>
-      <div class="staff"></div>
       <div class="text">${body}</div>
       <div class="foot"><b>Bard</b>${pager}<span>${ATTR}</span></div>
     </div></div>`;
@@ -452,7 +375,6 @@ function cardFront(s, fs, blocks, part = 1, total = 1) {
       <div class="titles"><div class="name">${esc(s.name)}</div><div class="sub">${esc(subLine(s))}</div></div>
       <div class="seal">${seal}</div>
     </div>
-    <div class="staff"></div>
     <div class="stats">
       <div class="stat"><div class="k">Casting Time</div><div class="v">${esc(s.castingTime)}</div></div>
       <div class="stat"><div class="k">Range</div><div class="v">${esc(s.range)}</div></div>
@@ -466,75 +388,23 @@ function cardFront(s, fs, blocks, part = 1, total = 1) {
     <div class="foot"><b>Bard</b>${pager}<span>${ATTR}</span></div>
   </div></div>`;
 }
-const LYRE_PATHS = (c, w = 5) => `<g fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round"><path d="M32 98C10 72 10 34 26 18c6-6 14-2 12 7-4 16-2 38 6 58"/><path d="M68 98c22-26 22-64 6-80-6-6-14-2-12 7 4 16 2 38-6 58"/><path d="M24 32h52M28 100h44"/></g><g stroke="${c}" stroke-width="${w * .32}" opacity=".85"><path d="M42 32v67M47 32v67M53 32v67M58 32v67"/></g>`;
-const lyre = (c = "#c39a4e") => `<svg viewBox="0 0 100 120" aria-hidden="true">${LYRE_PATHS(c)}</svg>`;
-
-// Inner face of a card is 59.8 × 84.8 mm; SVG overlays use that as their viewBox (1 unit = 1 mm).
-const VB = `viewBox="0 0 59.8 84.8"`;
-
-function scoreSvg() {
-  const ink = "#6b4f3a", wine = "#5b2a5e";
-  let s = "";
-  // five staves above and below the cartouche
-  const staves = [5, 15.5, 26, 54.5, 65, 75.5];
-  let seed = 7; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
-  for (const y0 of staves) {
-    for (let i = 0; i < 5; i++) s += `<line x1="3.5" x2="56.3" y1="${y0 + i * 1.05}" y2="${y0 + i * 1.05}" stroke="${ink}" stroke-width=".13" opacity=".7"/>`;
-    s += `<line x1="3.5" x2="3.5" y1="${y0}" y2="${y0 + 4.2}" stroke="${ink}" stroke-width=".2"/><line x1="56.3" x2="56.3" y1="${y0}" y2="${y0 + 4.2}" stroke="${ink}" stroke-width=".2"/>`;
-    s += `<line x1="30" x2="30" y1="${y0}" y2="${y0 + 4.2}" stroke="${ink}" stroke-width=".15" opacity=".7"/>`;
-    for (let x = 7; x < 54; x += 4.6 + rnd() * 1.6) {
-      if (Math.abs(x - 30) < 1.4) continue;
-      const step = Math.floor(rnd() * 9), y = y0 + 4.2 - step * .525, up = step < 4;
-      s += `<ellipse cx="${x.toFixed(2)}" cy="${y.toFixed(2)}" rx=".72" ry=".5" transform="rotate(-22 ${x.toFixed(2)} ${y.toFixed(2)})" fill="${ink}" opacity=".85"/>`;
-      s += up ? `<line x1="${(x + .66).toFixed(2)}" x2="${(x + .66).toFixed(2)}" y1="${y.toFixed(2)}" y2="${(y - 3.3).toFixed(2)}" stroke="${ink}" stroke-width=".14" opacity=".85"/>`
-              : `<line x1="${(x - .66).toFixed(2)}" x2="${(x - .66).toFixed(2)}" y1="${y.toFixed(2)}" y2="${(y + 3.3).toFixed(2)}" stroke="${ink}" stroke-width=".14" opacity=".85"/>`;
-    }
-  }
-  // cartouche
-  s += `<ellipse cx="29.9" cy="42.4" rx="17.5" ry="13.4" fill="#f7efdc" stroke="${wine}" stroke-width=".55"/>`;
-  s += `<ellipse cx="29.9" cy="42.4" rx="16.3" ry="12.2" fill="none" stroke="#c39a4e" stroke-width=".25"/>`;
-  s += `<g transform="translate(16.6 37.1) scale(.088)">${LYRE_PATHS(wine, 6)}</g>`;
-  s += `<text x="36.4" y="45.6" font-family="Cinzel, serif" font-weight="700" font-size="5.2" fill="${wine}" text-anchor="middle" letter-spacing=".9">BARD</text>`;
-  s += `<text x="36.4" y="39.4" font-family="'Alegreya Sans SC', sans-serif" font-weight="700" font-size="1.9" fill="${ink}" text-anchor="middle" letter-spacing=".45">SPELLBOOK</text>`;
-  return `<svg class="ov" ${VB} aria-hidden="true">${s}</svg>`;
+// Card back emblem: classical kithara, gold line art in a 100 × 120 box.
+const GOLD = "#dcb767";
+function kithara(c = GOLD) {
+  let strings = "";
+  for (let i = 0; i < 7; i++) strings += `M${38 + i * 4} 30V90`;
+  return `<svg viewBox="0 0 100 120" aria-hidden="true"><g fill="none" stroke="${c}" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 96H78L72 112H28Z" stroke-width="5"/>
+    <circle cx="50" cy="104" r="3" stroke-width="2"/>
+    <path d="M27 96C14 78 16 50 24 34C28 26 26 18 18 16C12 15 10 22 15 24" stroke-width="5"/>
+    <path d="M73 96C86 78 84 50 76 34C72 26 74 18 82 16C88 15 90 22 85 24" stroke-width="5"/>
+    <path d="M21 30H79" stroke-width="5"/>
+    <circle cx="19" cy="30" r="2.6" fill="${c}" stroke="none"/><circle cx="81" cy="30" r="2.6" fill="${c}" stroke="none"/>
+    <path d="M35 90H65" stroke-width="3.5"/>
+    <path d="${strings}" stroke-width="1.4" opacity=".85"/>
+  </g></svg>`;
 }
-
-function grimoireSvg() {
-  const g = "#d2a95a";
-  const corner = `<g fill="none" stroke="${g}" stroke-width=".35"><path d="M5.5 15 Q5.5 5.5 15 5.5"/><path d="M7.4 12 Q7.4 7.4 12 7.4"/></g><circle cx="7.9" cy="7.9" r=".9" fill="${g}"/><path d="M10.5 10.5 l1.2 -1.2 l1.2 1.2 l-1.2 1.2z" fill="${g}" opacity=".8"/>`;
-  let s = `<rect x="2.6" y="2.6" width="54.6" height="79.6" rx="1" fill="none" stroke="${g}" stroke-width=".5"/>`;
-  s += `<rect x="3.8" y="3.8" width="52.2" height="77.2" rx=".6" fill="none" stroke="${g}" stroke-width=".18" stroke-dasharray=".6 .5"/>`;
-  s += corner + `<g transform="translate(59.8 0) scale(-1 1)">${corner}</g><g transform="translate(0 84.8) scale(1 -1)">${corner}</g><g transform="translate(59.8 84.8) scale(-1 -1)">${corner}</g>`;
-  // central lozenge, blind-tooled
-  s += `<path d="M29.9 22 L45 42.4 L29.9 62.8 L14.8 42.4Z" fill="rgb(0 0 0 / .18)" stroke="${g}" stroke-width=".5"/>`;
-  s += `<path d="M29.9 24.6 L43 42.4 L29.9 60.2 L16.8 42.4Z" fill="none" stroke="${g}" stroke-width=".18"/>`;
-  s += `<g transform="translate(23.4 33.6) scale(.13)">${LYRE_PATHS(g, 5)}</g>`;
-  s += `<text x="29.9" y="15.2" font-family="Alegreya, serif" font-style="italic" font-size="3" fill="${g}" text-anchor="middle">Spells of the</text>`;
-  s += `<text x="29.9" y="73.2" font-family="Cinzel, serif" font-weight="700" font-size="5.6" fill="${g}" text-anchor="middle" letter-spacing="1.6">BARD</text>`;
-  s += `<line x1="21" x2="38.8" y1="17.6" y2="17.6" stroke="${g}" stroke-width=".2"/><line x1="18" x2="41.8" y1="75.6" y2="75.6" stroke="${g}" stroke-width=".2"/>`;
-  return `<svg class="ov" ${VB} aria-hidden="true">${s}</svg>`;
-}
-
-const BACKS = {
-  lyre: { label: "Lyre medallion", note: "the original",
-    html: () => `<div class="tiny">Spellbook</div><div class="medal">${lyre()}</div><div class="cls">Bard</div>` },
-  stage: { label: "Curtain call", note: "velvet stage, spotlight",
-    html: () => `<div class="valance"></div><div class="floor"></div><div class="abs tiny">Tonight’s spells</div><div class="abs lyre">${lyre("#5a1420")}</div><div class="abs cls">Bard</div>` },
-  score: { label: "Sheet music", note: "aged score, cartouche",
-    html: () => scoreSvg() },
-  resonance: { label: "Resonance", note: "art-deco sound waves",
-    html: () => `<div class="abs tiny"><span>Spellbook</span></div><div class="diamond">${lyre()}</div><div class="abs cls"><span>Bard</span></div>` },
-  grimoire: { label: "Grimoire", note: "tooled leather binding",
-    html: () => grimoireSvg() },
-};
-const BACK_KEY = "bard-spell-cards-back-v1";
-let backStyle = "lyre";
-try { const b = localStorage.getItem(BACK_KEY); if (b && BACKS[b]) backStyle = b; } catch (e) {}
-const cardBack = (style = backStyle) => `<div class="card back back-${style}"><div class="inner">${BACKS[style].html()}</div></div>`;
-function renderBackGrid() {
-  $("#back-grid").innerHTML = Object.entries(BACKS).map(([k, b]) =>
-    `<button type="button" class="back-opt" data-back="${k}" aria-pressed="${k === backStyle}">${cardBack(k)}<span>${b.label}</span><small>${b.note}</small></button>`).join("");
-}
+const cardBack = () => `<div class="card back back-lyre"><div class="inner"><div class="tiny">Spellbook</div><div class="medal">${kithara()}</div><div class="cls">Bard</div></div></div>`;
 
 /* ---------- layout: shrink to fit, otherwise split onto continuation cards ---------- */
 const MAX_FS = 7.4, MIN_FS = 5.8, SPLIT_FS = 6.6;
@@ -649,13 +519,7 @@ function renderSheets() {
   $("#p-sum").textContent = `${cards.length} cards · ${pages} ${pages === 1 ? "page" : "pages"}`;
 }
 
-function renderAll() { renderList(); renderPreview(); renderBackGrid(); if (view === "print") renderSheets(); }
-$("#back-grid").addEventListener("click", e => {
-  const b = e.target.closest("[data-back]"); if (!b) return;
-  backStyle = b.dataset.back;
-  try { localStorage.setItem(BACK_KEY, backStyle); } catch (err) {}
-  renderPreview(); renderBackGrid();
-});
+function renderAll() { renderList(); renderPreview(); if (view === "print") renderSheets(); }
 
 /* ---------- events ---------- */
 $("#lvl-filter").innerHTML = `<option value="">All levels</option>` + Array.from({ length: 10 }, (_, i) => `<option value="${i}">${i == 0 ? "Cantrips" : "Level " + i}</option>`).join("");
